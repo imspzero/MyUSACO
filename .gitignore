@@ -1,0 +1,6 @@
+*.class
+*.exe
+Debug/
+.settings/
+
+
