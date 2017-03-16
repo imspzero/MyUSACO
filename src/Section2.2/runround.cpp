@@ -16,24 +16,57 @@ unsigned long int next_round_num;
 
 bool check_is_round_num(unsigned long int num){
 
+	int count_number[10] = {0};
+
 	unsigned long int a = num;
 	int digit_count=0;
 	do{
 		digit_count++;
+		int i = a%10;
+		count_number[i]++;
+		if(count_number[i]>1){
+			return false;
+		}
 		a = a/10;
 	}while(a>=1);
 
-	cout<<digit_count<<endl;
+//	cout<<"digit_count: "<<digit_count<<endl;
 
+	// use digit_array as the travel flag for each digit
 	bool digit_array[digit_count];
 	for(int i = 0;i<digit_count;i++){
 		digit_array[i] = false;
 	}
+
+	// transfer num into an int array
+	int num_array[digit_count];
+	unsigned long int tmp = num;
+	for(int i = digit_count-1;i>=0;i--){
+		num_array[i] = tmp%10;
+		tmp = tmp/10;
+	}
+
+	cout<<"---"<<endl;
+	for(int i = 0;i<digit_count;i++){
+		cout<<" "<<num_array[i];
+	}
+	cout<<"---"<<endl;
+
 	sout<<num;
 	string num_str = sout.str();
-	cout<<num_str<<endl;
-	cout<<"--------------------"<<endl;
+	sout.flush();
 
+	// the result should has no zero digit. if has any, return false.
+	for(int i = 0;i<num_str.length();i++){
+		if(num_str[i]=='0'){
+			return false;
+		}
+	}
+
+//	cout<<num_str<<endl;
+//	cout<<"--------------------"<<endl;
+
+	// travel each digit
 	int loop_index=0;
 	int total_step = 0;
 	while(digit_array[loop_index]!=true){
@@ -44,9 +77,11 @@ bool check_is_round_num(unsigned long int num){
 
 		digit_array[loop_index] = true;
 		total_step = total_step + (num_str[loop_index]-'0');
+
 //		cout<<"total_step"<<total_step<<endl;
 
 		loop_index = total_step%num_str.length();
+
 //		cout<<"next index:"<<loop_index<<endl;
 
 	}
@@ -76,15 +111,21 @@ int main() {
 
 //	while(!find_result){
 //		inc_num++;
-//
+//		cout<<inc_num<<endl;
 //		find_result = check_is_round_num(inc_num);
 //	}
 
-	find_result = check_is_round_num(inc_num);
+	cout<<"123: "<<check_is_round_num(123)<<endl;
+//	cout<<"100: "<<check_is_round_num(100)<<endl;
+//	cout<<"111: "<<check_is_round_num(111)<<endl;
 
-	cout<<find_result<<endl;
+//	find_result = check_is_round_num(inc_num);
+//	cout<<find_result<<endl;
+
+	cout<<start_num<<endl;
 	cout<<"---------------"<<endl;
 	cout<<inc_num<<endl;
+
 	fout<<inc_num<<endl;
 	fin.close();
 	fout.close();
