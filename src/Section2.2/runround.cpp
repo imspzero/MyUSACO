@@ -46,12 +46,12 @@ bool check_is_round_num(unsigned long int num){
 		tmp = tmp/10;
 	}
 
-	cout<<"---"<<endl;
-	for(int i = 0;i<digit_count;i++){
-		cout<<num_array[i]<<" ";
-	}
-	cout<<endl;
-	cout<<"---"<<endl;
+//	cout<<"---"<<endl;
+//	for(int i = 0;i<digit_count;i++){
+//		cout<<num_array[i]<<" ";
+//	}
+//	cout<<endl;
+//	cout<<"---"<<endl;
 
 //	sout<<num;
 //	string num_str = sout.str();
@@ -112,7 +112,7 @@ int main() {
 
 	while(!find_result){
 		inc_num++;
-		cout<<inc_num<<endl;
+//		cout<<inc_num<<endl;
 		find_result = check_is_round_num(inc_num);
 	}
 
