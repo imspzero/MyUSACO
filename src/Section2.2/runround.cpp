@@ -48,17 +48,18 @@ bool check_is_round_num(unsigned long int num){
 
 	cout<<"---"<<endl;
 	for(int i = 0;i<digit_count;i++){
-		cout<<" "<<num_array[i];
+		cout<<num_array[i]<<" ";
 	}
+	cout<<endl;
 	cout<<"---"<<endl;
 
-	sout<<num;
-	string num_str = sout.str();
-	sout.flush();
+//	sout<<num;
+//	string num_str = sout.str();
+//	sout.flush();
 
 	// the result should has no zero digit. if has any, return false.
-	for(int i = 0;i<num_str.length();i++){
-		if(num_str[i]=='0'){
+	for(int i = 0;i<digit_count;i++){
+		if(num_array[i]==0){
 			return false;
 		}
 	}
@@ -76,11 +77,11 @@ bool check_is_round_num(unsigned long int num){
 //		cout<<"digit to int:"<<num_str[loop_index]-'0'<<endl;
 
 		digit_array[loop_index] = true;
-		total_step = total_step + (num_str[loop_index]-'0');
+		total_step = total_step + (num_array[loop_index]);
 
 //		cout<<"total_step"<<total_step<<endl;
 
-		loop_index = total_step%num_str.length();
+		loop_index = total_step%digit_count;
 
 //		cout<<"next index:"<<loop_index<<endl;
 
@@ -109,13 +110,13 @@ int main() {
 	unsigned long int inc_num = start_num;
 	bool find_result = false;
 
-//	while(!find_result){
-//		inc_num++;
-//		cout<<inc_num<<endl;
-//		find_result = check_is_round_num(inc_num);
-//	}
+	while(!find_result){
+		inc_num++;
+		cout<<inc_num<<endl;
+		find_result = check_is_round_num(inc_num);
+	}
 
-	cout<<"123: "<<check_is_round_num(123)<<endl;
+//	cout<<"1024: "<<check_is_round_num(1024)<<endl;
 //	cout<<"100: "<<check_is_round_num(100)<<endl;
 //	cout<<"111: "<<check_is_round_num(111)<<endl;
 
