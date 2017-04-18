@@ -5,20 +5,21 @@
  */
 
 #include <iostream>
-#include <fstream>
+#include <memory.h>
 #include <string>
+#include <fstream>
 #include <set>
 
 using namespace std;
-int N = 100;
-int counter = 0; // the total number of button presses
+int N ;
+int counter; // the total number of button presses
 int lamps_on[101];
 int lamps_off[101];
-
-//vector<int> lamps_on(1);
-//vector<int> lamps_off(1);
 set<string> result_set;
 int button_times_is_odd[5];
+
+ifstream fin("lamps.in");
+ofstream fout("lamps.out");
 
 //void testInput() {
 //	cout << N << endl;
@@ -130,6 +131,11 @@ void press_and_check() {
 	if (is_final_lamps_valid(lamps)) {
 		string temp_str = "";
 
+		for(int i = 1;i< N+1;i++){
+			cout<<lamps[i];
+		}
+		cout<<endl;
+
 		for (int i = 1; i < N + 1; i++) {
 			temp_str = temp_str + (char) (lamps[i] + '0');
 		}
@@ -161,24 +167,22 @@ void back_track_search(int button_num) {
 
 int main() {
 
-	fstream fin("lamps.in");
-	ofstream fout("lamps.out");
-
 	// process input
-	fin >> N;
-	fin >> counter;
+	fin >> N >>counter;
 
+//	cout<<"step 1"<<endl;
+
+	memset(lamps_on,0,sizeof(lamps_on));
+	memset(lamps_off,0,sizeof(lamps_off));
 	int tmp = 0;
-	fin >> tmp;
-	while (tmp != -1) {
-		lamps_on[tmp] = 1;
-		fin >> tmp;
-	}
 
-	fin >> tmp;
-	while (tmp != -1) {
+	while (fin >> tmp) {
+		if(tmp == -1)break;
+		lamps_on[tmp] = 1;
+	}
+	while (fin >> tmp) {
+		if(tmp == -1)break;
 		lamps_off[tmp] = 1;
-		fin >> tmp;
 	}
 
 //	pressButton4(lamps);
@@ -188,14 +192,18 @@ int main() {
 //	cout<<endl;
 //	testInput();
 
-	if (counter == 0) {
-		cout << "0-----" << endl;
-		string tmp = "";
-		for (int i = 1; i <= N; i++) {
-			tmp = tmp + '1';
-		}
-		fout << tmp << endl;
-	} else {
+//	cout<<"step 2"<<endl;
+//	if (counter == 0) {
+//		cout << "N: " <<N<<endl;
+//		cout << "counter: "<< counter << endl;
+//
+//		cout<<"step 3"<<endl;
+//		string tmp = "";
+//		for (int i = 1; i <= N; i++) {
+//			tmp = tmp + '1';
+//		}
+//		fout << tmp << endl;
+//	} else {
 		back_track_search(1);
 		if (result_set.size() == 0) {
 			fout << "IMPOSSIBLE" << endl;
@@ -205,7 +213,7 @@ int main() {
 				fout << *it << endl;
 			}
 		}
-	}
+//	}
 
 	fin.close();
 	fout.close();
