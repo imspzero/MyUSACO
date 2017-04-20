@@ -1,7 +1,7 @@
 CXXFLAGS =	-O2 -g -Wall -fmessage-length=0
 
 
-TARGET =	ride combo wormhole skidesign preface subset runround lamps
+TARGET =	ride combo wormhole skidesign preface subset runround lamps prefix
 
 ride:	
 	$(CXX)	Section1.1/ride.cpp -o ../Debug/ride
@@ -26,6 +26,9 @@ lamps:
 
 subset:	
 	$(CXX)	Section2.2/subset.cpp -o ../Debug/subset
+
+prefix:	
+	$(CXX)	Section2.3/prefix.cpp -o ../Debug/prefix
 
 all:	$(TARGET)
 
