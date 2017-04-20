@@ -2,6 +2,7 @@
 *.class
 Debug/
 .settings/
+.cproject
 
 # Compiled Object files
 *.slo
