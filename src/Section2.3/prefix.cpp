@@ -85,7 +85,6 @@ void test_input() {
 //	return length;
 //}
 
-
 /**
  * return the longest prefix of sequence[start_index,end_index]
  *
@@ -100,7 +99,6 @@ int solve_by_dp(int s_index){
 
 //	cout<<"step 1"<<endl;
 
-
 	int max_length = 0;
 	for(int i = 0;i<v_primitives.size();i++){
 		string primitive = v_primitives[i];
@@ -113,6 +111,8 @@ int solve_by_dp(int s_index){
 			if(match(primitive,s_index)){
 				if(primitive.size()==(sequence.size()-s_index)){
 					current_len = primitive.size();
+					max_length = primitive.size();
+					break;
 				}else{
 					current_len = primitive.size() + solve_by_dp(s_index+primitive.size());
 				}
@@ -151,11 +151,18 @@ int main() {
 		sequence.append(tmp_str);
 	}
 
-//	test_input();
+	test_input();
 
 	int longest_prefix_length = 0;
 
-	cout<<sequence.size()<<endl;
+//	cout<<sequence.size()<<endl;
+
+	for(int i = sequence.size()-1;i>=0;i--){
+		solve_by_dp(i);
+	}
+
+	longest_prefix_length = prefix_length[0];
+
 //	longest_prefix_length = solve_by_dp(0);
 //	solve_by_dp(0, sequence.size() - 1);
 
@@ -166,6 +173,7 @@ int main() {
 
 	cout << longest_prefix_length << endl;
 	fout << longest_prefix_length << endl;
+
 	fin.close();
 	fout.close();
 	return 0;
